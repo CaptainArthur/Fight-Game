@@ -1,0 +1,48 @@
+#These are levels where are players fighthing
+import time
+import random
+from playerAtributes import player1, player2, enemydamage, playerdamage, sword
+from fightClass import sub_two_player_hp
+
+#Repeating system for loosing level, Player (you) is going first and then Player2 (enemy)
+def repeat():
+    while True:
+        player1.hitpoints = player1.maxhp
+        player2.hitpoints = player2.maxhp
+        print("Starting a new fight...")
+        time.sleep(2)
+
+        while True:
+            player2.hitpoints = sub_two_player_hp(player2, playerdamage)
+            print("You gave: " + str(playerdamage) + " damage "  + str(sword) + " and sword damage")
+            print("Enemy's health is now: " + str(player2.hitpoints))
+            time.sleep(1)
+
+            player1.hitpoints = sub_two_player_hp(player1, enemydamage)
+            print("You got: " + str(enemydamage) + " damage " + str(sword) + " and sword damage")
+            print("Your health is now: " + str(player1.hitpoints))
+            time.sleep(1)
+
+            if player1.hitpoints <= 0:
+                print("You lost. Your health is 0.")
+                break
+            if player2.hitpoints <= 0:
+                print("You won! Enemy's hp is 0.")
+                return
+
+while True:
+    player2.hitpoints = sub_two_player_hp(player2, playerdamage)
+    print("You gave: " + str(playerdamage) + " damage "  + str(sword) + " and sword damage")
+    print("Enemy's health is now: " + str(player2.hitpoints))
+    time.sleep(1)
+
+    player1.hitpoints = sub_two_player_hp(player1, enemydamage)
+    print("You got: " + str(enemydamage) + " damage "  + str(sword) + " and sword damage")
+    print("Your health is now: " + str(player1.hitpoints))
+    time.sleep(1)
+    if player1.hitpoints <= 0 == 0:
+        print("You lost. Your health is 0.")
+        repeat()
+    if player2.hitpoints <= 0 == 0:
+        print("You won! Enemy's hp is 0.")
+        break
